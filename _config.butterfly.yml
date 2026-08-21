@@ -30,7 +30,34 @@ archive_img: /images/rin/4-00.jpg
 default_top_img: /images/rin/4-00.jpg
 index_site_info_top: 35%
 index_top_img_height: 100vh
-background: "#f4f7fb"
+background: "#0b0f16"
+
+darkmode:
+  enable: true
+  button: true
+  autoChangeMode: false
+
+theme_color:
+  enable: true
+  main: "#8b5cf6"
+  paginator: "#8b5cf6"
+  button_hover: "#a78bfa"
+  text_selection: "#8b5cf6"
+  link_color: "#c4b5fd"
+  meta_color: "#94a3b8"
+  hr_color: "#334155"
+  code_foreground: "#e2e8f0"
+  code_background: "rgba(15, 23, 42, .78)"
+  toc_color: "#a78bfa"
+  blockquote_padding_color: "#8b5cf6"
+  blockquote_background_color: "rgba(139, 92, 246, .14)"
+  scrollbar_color: "#8b5cf6"
+  meta_theme_color_light: "0b0f16"
+  meta_theme_color_dark: "#0b0f16"
+
+mask:
+  header: true
+  footer: true
 
 subtitle:
   enable: true
@@ -109,7 +136,7 @@ share:
 comments:
   use:
 
-display_mode: light
+display_mode: dark
 rounded_corners_ui: true
 text_align_justify: false
 enter_transitions: true
