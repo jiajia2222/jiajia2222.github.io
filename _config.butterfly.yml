@@ -1,0 +1,113 @@
+# Butterfly theme overrides for Mou Blog.
+
+nav:
+  logo: /img/butterfly-icon.png
+  display_title: true
+  display_post_title: true
+  fixed: true
+  menu:
+    首页: / || fas fa-home
+    归档: /archives/ || fas fa-archive
+    关于: /about/ || fas fa-user
+
+code_blocks:
+  theme: light
+  macStyle: true
+  copy: true
+  language: true
+  shrink: false
+
+social:
+  fab fa-github: https://github.com/jiajia2222 || GitHub || "#24292e"
+
+favicon: /img/favicon.ico
+avatar:
+  img: https://yun.nadev.xyz/file/1780401843349_images.jpg
+  effect: true
+disable_top_img: false
+default_top_img: false
+index_img: false
+archive_img: false
+background: "#f4f7fb"
+
+subtitle:
+  enable: true
+  effect: true
+  source: false
+  sub:
+    - 记录技术、折腾与生活
+    - 一个小小的个人博客
+
+index_layout: 3
+index_post_content:
+  method: 3
+  length: 350
+
+toc:
+  post: true
+  page: false
+  number: true
+  expand: false
+
+post_copyright:
+  enable: false
+
+footer:
+  owner:
+    enable: true
+    since: 2026
+  copyright:
+    enable: true
+    version: true
+  custom_text: "<span>Powered by Hexo &amp; Butterfly</span>"
+
+aside:
+  enable: true
+  position: right
+  card_author:
+    enable: true
+    description: 一个记录技术、网络服务与日常折腾的小博客
+    button:
+      enable: true
+      icon: fab fa-github
+      text: GitHub
+      link: https://github.com/jiajia2222
+  card_announcement:
+    enable: true
+    content: 欢迎来到 Mou Blog
+  card_recent_post:
+    enable: true
+    limit: 5
+  card_categories:
+    enable: true
+    limit: 8
+  card_tags:
+    enable: true
+    limit: 20
+  card_archives:
+    enable: true
+    type: monthly
+    limit: 8
+  card_webinfo:
+    enable: true
+    post_count: true
+    last_push_date: true
+
+local_search:
+  enable: true
+  preload: false
+  top_n_per_article: 1
+  unescape: false
+  pagination:
+    enable: false
+
+share:
+  use: sharejs
+
+comments:
+  use:
+
+display_mode: light
+rounded_corners_ui: true
+text_align_justify: false
+enter_transitions: true
