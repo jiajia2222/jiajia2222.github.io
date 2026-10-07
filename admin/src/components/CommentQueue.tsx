@@ -1,0 +1,16 @@
+'use client';
+
+import { useMemo, useState } from 'react';
+import { Check, Flag, Search, Trash2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+
+type Comment = { id: string; name: string; email: string; content: string; status: string; createdAt: string; post: { title: string } };
+
+export default function CommentQueue({ comments }: { comments: Comment[] }) {
+  const router = useRouter(); const [filter, setFilter] = useState('all'); const [query, setQuery] = useState(''); const [message, setMessage] = useState('');
+  const visible = useMemo(() => comments.filter((comment) => (filter === 'all' || comment.status === filter) && (!query || `${comment.name} ${comment.email} ${comment.content}`.toLowerCase().includes(query.toLowerCase()))), [comments, filter, query]);
+  const update = async (id: string, status: string) => { const response = await fetch(`/api/comments/${id}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status }) }); if (!response.ok) { setMessage('操作失败，请稍后重试'); return; } setMessage('评论状态已更新'); router.refresh(); };
+  return <><div className="toolbar"><div className="toolbar-left"><div className="filter-tabs">{[['all', '全部'], ['pending', '待审核'], ['approved', '已通过'], ['spam', '垃圾评论']].map(([value, label]) => <button key={value} className={`filter-tab ${filter === value ? 'active' : ''}`} onClick={() => setFilter(value)}>{label}</button>)}</div></div><div className="toolbar-right"><div className="search"><input className="input" placeholder="搜索访客或评论内容" value={query} onChange={(event) => setQuery(event.target.value)} /></div></div></div>{message && <div className="save-bar" style={{ marginBottom: 12 }}><span>{message}</span></div>}<section className="panel"><div className="table-wrap"><table><thead><tr><th>访客</th><th>评论</th><th>文章</th><th>状态</th><th>时间</th><th>操作</th></tr></thead><tbody>{visible.length ? visible.map((comment) => <tr key={comment.id}><td><span className="table-title">{comment.name}</span><span className="table-sub">{comment.email}</span></td><td style={{ maxWidth: 400 }}>{comment.content}</td><td>{comment.post.title}</td><td><span className={`status ${comment.status}`}>{label(comment.status)}</span></td><td>{new Intl.DateTimeFormat('zh-CN', { month: 'short', day: 'numeric' }).format(new Date(comment.createdAt))}</td><td><div className="row-actions">{comment.status !== 'approved' && <button className="icon-button" title="通过" onClick={() => update(comment.id, 'approved')}><Check size={14} /></button>}{comment.status !== 'spam' && <button className="icon-button" title="标记垃圾评论" onClick={() => update(comment.id, 'spam')}><Flag size={14} /></button>}{comment.status !== 'trash' && <button className="icon-button" title="移入回收站" onClick={() => update(comment.id, 'trash')}><Trash2 size={14} /></button>}</div></td></tr>) : <tr><td colSpan={6}><div className="empty"><Search size={20} style={{ marginBottom: 8 }} /><div>没有匹配的评论</div></div></td></tr>}</tbody></table></div><div className="pagination"><span>显示 {visible.length} 条评论</span><span>敏感评论会自动进入垃圾队列</span></div></section></>;
+}
+
+function label(value: string) { return ({ approved: '已通过', pending: '待审核', spam: '垃圾评论', trash: '回收站' } as Record<string, string>)[value] || value; }
