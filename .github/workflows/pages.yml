@@ -33,6 +33,11 @@ jobs:
       - name: Build Hexo site
         run: npm run build
 
+      - name: Add admin shortcut
+        run: |
+          mkdir -p public/admin
+          cp .github/admin-redirect.html public/admin/index.html
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
